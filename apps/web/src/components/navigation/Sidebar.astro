@@ -1,5 +1,22 @@
 ---
 import "./sidebar.css";
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+
+const links = [
+  {
+    label: "Inicio",
+    href: "/",
+  },
+  {
+    label: "Explorar",
+    href: "/explorar",
+  },
+  {
+    label: "Tu biblioteca",
+    href: "/biblioteca",
+  },
+];
 ---
 
 <aside class="sidebar scrollable">
@@ -19,21 +36,28 @@ import "./sidebar.css";
     class="sidebar-nav"
     aria-label="Navegación principal"
   >
-    <a
-      class="sidebar-link sidebar-link--active"
-      href="/"
-      aria-current="page"
-    >
-      Inicio
-    </a>
+    {
+      links.map((link) => {
+        const isActive =
+          link.href === "/"
+            ? currentPath === "/"
+            : currentPath === link.href ||
+              currentPath.startsWith(`${link.href}/`);
 
-    <a class="sidebar-link" href="/#explorar">
-      Explorar
-    </a>
-
-    <a class="sidebar-link" href="/#biblioteca">
-      Tu biblioteca
-    </a>
+        return (
+          <a
+            class:list={[
+              "sidebar-link",
+              { "sidebar-link--active": isActive },
+            ]}
+            href={link.href}
+            aria-current={isActive ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        );
+      })
+    }
   </nav>
 
   <p class="sidebar-caption">

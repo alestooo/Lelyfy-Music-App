@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/pages/conexion.css";
+---
+
+<BaseLayout title="Prueba de conexión">
+  <section class="connection-page">
+    <div class="connection-card">
+      <p class="connection-eyebrow">
+        PRUEBA DE DESARROLLO
+      </p>
+
+      <h1>Conexión con Laravel</h1>
+
+      <p class="connection-description">
+        Comprueba que la web puede consultar la API de Lelyfy.
+      </p>
+
+      <button id="check-connection" type="button">
+        Comprobar conexión
+      </button>
+
+      <div
+        id="connection-result"
+        class="connection-result"
+        data-state="idle"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        <strong id="connection-title">
+          Pendiente de comprobar
+        </strong>
+
+        <p id="connection-message">
+          Pulsa el botón para enviar una petición a Laravel.
+        </p>
+      </div>
+
+      <a class="connection-back" href="/">
+        Volver al inicio
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { checkApiHealth } from "../services/api";
+
+  const button = document.querySelector<HTMLButtonElement>(
+    "#check-connection",
+  );
+
+  const result = document.querySelector<HTMLDivElement>(
+    "#connection-result",
+  );
+
+  const title = document.querySelector<HTMLElement>(
+    "#connection-title",
+  );
+
+  const message = document.querySelector<HTMLParagraphElement>(
+    "#connection-message",
+  );
+
+  if (button && result && title && message) {
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+      button.textContent = "Comprobando…";
+
+      result.dataset.state = "loading";
+      title.textContent = "Conectando con Laravel";
+      message.textContent = "Esperando la respuesta de la API.";
+
+      try {
+        const data = await checkApiHealth();
+
+        result.dataset.state = "success";
+        title.textContent = "Conexión correcta";
+        message.textContent = `${data.service}: ${data.message}`;
+      } catch (error) {
+        result.dataset.state = "error";
+        title.textContent = "No se pudo comprobar la conexión";
+
+        const detail =
+          error instanceof Error
+            ? error.message
+            : "Se produjo un error inesperado.";
+
+        message.textContent =
+          `${detail} Comprueba que Laravel siga ejecutándose ` +
+          "en el puerto 8000.";
+      } finally {
+        button.disabled = false;
+        button.textContent = "Volver a comprobar";
+      }
+    });
+  }
+</script>

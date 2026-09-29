@@ -1,0 +1,27 @@
+name: lelyfy
+
+services:
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: lelyfy
+      POSTGRES_USER: lelyfy
+      POSTGRES_PASSWORD: lelyfy_local_dev
+
+    ports:
+      - "127.0.0.1:5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lelyfy -d lelyfy"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+volumes:
+  postgres_data:

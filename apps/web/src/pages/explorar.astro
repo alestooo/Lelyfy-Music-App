@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/pages/explorar.css";
+
+const categories = [
+  {
+    title: "Artistas",
+    description: "Voces nuevas y tus próximos favoritos.",
+    symbol: "♫",
+    color: "purple",
+  },
+  {
+    title: "Álbumes",
+    description: "Historias para escuchar de principio a fin.",
+    symbol: "◎",
+    color: "blue",
+  },
+  {
+    title: "Singles y EPs",
+    description: "Pequeños lanzamientos, grandes descubrimientos.",
+    symbol: "✦",
+    color: "pink",
+  },
+];
+---
+
+<BaseLayout
+  title="Explorar"
+  description="Descubre artistas, álbumes, singles y EPs en Lelyfy."
+>
+  <div class="explore-page">
+    <header class="explore-header">
+      <p class="explore-eyebrow">
+        DESCUBRE LELYFY
+      </p>
+
+      <h1 class="explore-title">
+        Encuentra tu próximo<br />
+        <span>sonido favorito.</span>
+      </h1>
+
+      <p class="explore-description">
+        Un espacio para descubrir artistas y explorar su música.
+      </p>
+    </header>
+
+    <section
+      class="explore-section"
+      aria-labelledby="categories-title"
+    >
+      <div class="explore-section-heading">
+        <h2 id="categories-title">
+          Un mundo por descubrir
+        </h2>
+
+        <p>
+          Cada lanzamiento tiene algo que contar.
+        </p>
+      </div>
+
+      <div class="explore-categories">
+        {
+          categories.map((category) => (
+            <article
+              class:list={[
+                "explore-category",
+                `explore-category--${category.color}`,
+              ]}
+            >
+              <span
+                class="explore-category-symbol"
+                aria-hidden="true"
+              >
+                {category.symbol}
+              </span>
+
+              <div class="explore-category-content">
+                <h3>{category.title}</h3>
+                <p>{category.description}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section
+      class="explore-section"
+      aria-labelledby="catalog-title"
+    >
+      <div class="explore-catalog-heading">
+        <h2 id="catalog-title">
+          Catálogo
+        </h2>
+
+        <span class="explore-count">
+          0 lanzamientos
+        </span>
+      </div>
+
+      <div class="explore-empty">
+        <div class="explore-empty-symbol" aria-hidden="true">
+          ♫
+        </div>
+
+        <h3>
+          Las primeras canciones están por llegar
+        </h3>
+
+        <p>
+          Aquí aparecerán los artistas y lanzamientos cuando
+          estén disponibles en Lelyfy.
+        </p>
+
+        <a class="explore-home-link" href="/">
+          Volver al inicio
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

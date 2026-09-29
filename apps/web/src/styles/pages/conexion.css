@@ -1,0 +1,140 @@
+.connection-page {
+  display: grid;
+  place-items: center;
+
+  min-height: 100%;
+  padding: 48px 24px;
+
+  background:
+    radial-gradient(
+      ellipse at 80% 0%,
+      #302449 0,
+      transparent 55%
+    ),
+    var(--background);
+}
+
+.connection-card {
+  width: 100%;
+  max-width: 620px;
+  padding: 36px;
+
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  background: var(--surface);
+}
+
+.connection-eyebrow {
+  margin: 0 0 18px;
+
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.connection-card h1 {
+  margin: 0;
+
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+
+.connection-description {
+  margin: 18px 0 28px;
+
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+#check-connection {
+  padding: 14px 20px;
+
+  border: 0;
+  border-radius: 10px;
+
+  color: #241530;
+  background: var(--accent);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#check-connection:hover:not(:disabled) {
+  background: #dabfff;
+}
+
+#check-connection:disabled {
+  opacity: 0.6;
+}
+
+.connection-result {
+  margin-top: 26px;
+  padding: 20px;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: #110e18;
+  overflow-wrap: anywhere;
+}
+
+.connection-result strong {
+  display: block;
+  font-size: 15px;
+}
+
+.connection-result p {
+  margin: 10px 0 0;
+
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.connection-result[data-state="loading"] {
+  border-color: #765399;
+}
+
+.connection-result[data-state="success"] {
+  border-color: #44765e;
+  background: #14241c;
+}
+
+.connection-result[data-state="success"] strong {
+  color: #9ce4b8;
+}
+
+.connection-result[data-state="error"] {
+  border-color: #965266;
+  background: #2b1720;
+}
+
+.connection-result[data-state="error"] strong {
+  color: #ffb5c7;
+}
+
+.connection-back {
+  display: inline-block;
+  margin-top: 24px;
+
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.connection-back:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 800px) {
+  .connection-page {
+    padding: 30px 20px;
+  }
+
+  .connection-card {
+    padding: 26px 22px;
+  }
+}

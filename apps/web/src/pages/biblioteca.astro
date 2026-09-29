@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/pages/biblioteca.css";
+
+const collections = [
+  {
+    title: "Tus favoritos",
+    description: "Las canciones que querrás volver a escuchar.",
+    symbol: "♥",
+    color: "purple",
+    emptyMessage: "Todavía no hay canciones guardadas.",
+  },
+  {
+    title: "Tus playlists",
+    description: "Una colección para cada momento.",
+    symbol: "☷",
+    color: "blue",
+    emptyMessage: "Todavía no hay playlists.",
+  },
+  {
+    title: "Artistas que sigues",
+    description: "Un lugar para tus artistas favoritos.",
+    symbol: "♫",
+    color: "pink",
+    emptyMessage: "Todavía no hay artistas guardados.",
+  },
+];
+---
+
+<BaseLayout
+  title="Tu biblioteca"
+  description="Reúne tus canciones favoritas, playlists y artistas en Lelyfy."
+>
+  <div class="library-page">
+    <header class="library-header">
+      <p class="library-eyebrow">
+        TU COLECCIÓN PERSONAL
+      </p>
+
+      <h1 class="library-title">
+        Tu biblioteca<span>.</span>
+      </h1>
+
+      <p class="library-description">
+        Las canciones, los artistas y los momentos que
+        quieras llevar contigo.
+      </p>
+    </header>
+
+    <section
+      class="library-collections"
+      aria-labelledby="collections-title"
+    >
+      <h2 id="collections-title" class="library-section-title">
+        Todo lo que te gusta
+      </h2>
+
+      <div class="library-grid">
+        {
+          collections.map((collection) => (
+            <article class="library-card">
+              <div
+                class:list={[
+                  "library-card-icon",
+                  `library-card-icon--${collection.color}`,
+                ]}
+                aria-hidden="true"
+              >
+                {collection.symbol}
+              </div>
+
+              <h3>{collection.title}</h3>
+
+              <p class="library-card-description">
+                {collection.description}
+              </p>
+
+              <p class="library-card-empty">
+                {collection.emptyMessage}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section
+      class="library-discover"
+      aria-labelledby="discover-title"
+    >
+      <div class="library-discover-copy">
+        <p class="library-eyebrow">
+          EMPIEZA A EXPLORAR
+        </p>
+
+        <h2 id="discover-title">
+          Tu próxima canción favorita<br />
+          todavía está por descubrir.
+        </h2>
+
+        <p class="library-discover-description">
+          Visita Explorar para conocer el espacio donde
+          encontrarás los lanzamientos de Lelyfy.
+        </p>
+      </div>
+
+      <a class="library-explore-link" href="/explorar">
+        Explorar música
+        <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+  </div>
+</BaseLayout>
