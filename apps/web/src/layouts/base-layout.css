@@ -1,0 +1,45 @@
+/* Distribución general */
+
+.app-shell {
+  display: grid;
+
+  grid-template-columns:
+    var(--sidebar-width)
+    minmax(0, 1fr);
+
+  grid-template-rows: minmax(0, 1fr);
+
+  height: calc(100vh - var(--player-height));
+  height: calc(100dvh - var(--player-height));
+
+  overflow: hidden;
+}
+
+/* Contenido desplazable */
+
+.app-content {
+  min-width: 0;
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  scroll-padding-top: 28px;
+
+  background: var(--background);
+}
+
+.app-content:focus-visible {
+  outline-offset: -3px;
+}
+
+/* Móvil */
+
+@media (max-width: 800px) {
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+}

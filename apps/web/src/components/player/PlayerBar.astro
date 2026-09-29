@@ -1,0 +1,54 @@
+---
+import "./player-bar.css";
+---
+
+<footer class="player-bar" aria-label="Reproductor de música">
+  <div class="player-track">
+    <div class="player-cover" aria-hidden="true">
+      ♫
+    </div>
+
+    <div class="player-track-info">
+      <strong class="player-track-title">
+        Sin canción seleccionada
+      </strong>
+
+      <small class="player-track-subtitle">
+        Tu próxima canción te espera
+      </small>
+    </div>
+  </div>
+
+  <div class="player-controls">
+    <button
+      class="player-control"
+      type="button"
+      disabled
+      aria-label="Canción anterior"
+    >
+      ⏮
+    </button>
+
+    <button
+      class="player-control player-control--play"
+      type="button"
+      disabled
+      aria-label="Reproducir"
+    >
+      ▶
+    </button>
+
+    <button
+      class="player-control"
+      type="button"
+      disabled
+      aria-label="Canción siguiente"
+    >
+      ⏭
+    </button>
+  </div>
+
+  <span class="player-time">
+    0:00 / 0:00
+  </span>
+</footer>

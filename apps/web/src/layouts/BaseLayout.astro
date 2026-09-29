@@ -1,0 +1,50 @@
+---
+import "../styles/global.css";
+import "./base-layout.css";
+
+import Sidebar from "../components/navigation/Sidebar.astro";
+import PlayerBar from "../components/player/PlayerBar.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Lelyfy: descubre artistas, lanzamientos y música.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+
+    <meta name="description" content={description} />
+
+    <title>{title} | Lelyfy</title>
+  </head>
+
+  <body>
+    <div class="app-shell">
+      <Sidebar />
+
+      <main
+        id="contenido"
+        class="app-content scrollable"
+        tabindex="0"
+        aria-label="Contenido principal"
+      >
+        <slot />
+      </main>
+    </div>
+
+    <PlayerBar />
+  </body>
+</html>
